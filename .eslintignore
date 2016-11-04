@@ -1,0 +1,5 @@
+karma.conf.js
+spec.bundle.js
+build/*
+dist/*
+blueprints/*
