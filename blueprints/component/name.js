@@ -1,6 +1,6 @@
 import angular from 'angular';
 import { {{pascalCase name}}Component } from './{{kabobCase name}}.component';
-import './{{kabobCase name}}.styl';
+import './{{kabobCase name}}.scss';
 
 export const {{pascalCase name}}Module = angular
   .module('{{dotCase name}}', [])

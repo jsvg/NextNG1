@@ -3,5 +3,6 @@
 .git
 node_modules
 .settings
+.happypack/
 *.log
 dist/

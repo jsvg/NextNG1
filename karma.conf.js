@@ -35,9 +35,12 @@ module.exports = function (config) {
       module: {
         loaders: [
           { test: /\.js/, exclude: [/app\/lib/, /node_modules/], loader: 'babel' },
-          { test: /\.html/, loader: 'raw' },
+          { test: /\.html/, loader: 'html' },
           { test: /\.css$/, loader: 'style!css' },
           { test: /\.scss$/, loader: 'style!css!postcss!sass' },
+          { test: /\.json$/, loader: 'json-loader' },
+          { test: /\.(eot|svg|ttf|woff|woff2)$/, loader: 'file-loader' },
+          { test: /\.(jpg|png|gif)$/, loaders: ['file-loader'] },
         ]
       },
       postcss: () => [

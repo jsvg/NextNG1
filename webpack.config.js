@@ -1,37 +1,47 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import path from 'path';
 import webpack from 'webpack';
+import HappyPack from 'happypack';
 import WebpackNotifierPlugin from 'webpack-notifier';
+import ProgressBarPlugin from 'progress-bar-webpack-plugin';
 import autoprefixer from 'autoprefixer';
 import postcssFocus from 'postcss-focus';
 import postcssReporter from 'postcss-reporter';
 
 export default {
   debug: true,
-  noInfo: false,
   progress: true,
   stats: true,
-  target: 'web',
-  devtool: 'source-map',
-  eslint: { configFile: path.resolve(process.cwd(), '.eslintrc') },
+  noInfo: false,
+  resolve: {
+    root: path.resolve(process.cwd(), 'client'),
+    modulesDirectories: [path.resolve(process.cwd(), 'node_modules')],
+  },
   module: {
     loaders: [
-      { test: /\.js$/, exclude: [/app\/lib/, /node_modules/], loader: 'ng-annotate!babel' },
-      { test: /\.html$/, loader: 'raw' },
-      { test: /\.eot(\?v=\d+.\d+.\d+)?$/, loader: 'url?name=[name].[ext]' },
-      { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url?limit=10000&mimetype=application/font-woff&name=[name].[ext]' },
-      { test: /\.ttf(\?v=\d+.\d+.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream&name=[name].[ext]' },
-      { test: /\.svg(\?v=\d+.\d+.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml&name=[name].[ext]' },
-      { test: /\.(jpe?g|png|gif)$/i, loader: 'file?name=[name].[ext]' },
-      { test: /\.ico$/, loader: 'file?name=[name].[ext]' },
+      { test: /\.html$/, loader: 'html' },
+      { test: /\.js$/, exclude: [/node_modules/], loader: 'ng-annotate!happypack/loader' },
+      { test: /\.json$/, loader: 'json-loader' },
+      { test: /\.(eot|svg|ttf|woff|woff2)$/, loader: 'file-loader' },
+      { test: /\.(jpg|png|gif)$/, loaders: ['file-loader', 'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}'] },
+      { test: /\.ico$/, loader: 'file-loader?name=[name].[ext]' },
     ],
   },
   plugins: [
+    new ProgressBarPlugin(),
     new WebpackNotifierPlugin({ alwaysNotify: true }),
+    new HappyPack({
+      loaders: ['babel'],
+    }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks(module) {
         return module.resource && module.resource.indexOf(path.resolve(process.cwd(), 'client')) === -1;
+      },
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
       },
     }),
   ],

@@ -2,9 +2,9 @@ import template from './{{kabobCase name}}.html';
 
 export const {{pascalCase name}}Component = {
   template,
-  bindings: { },
   restrict: 'E',
-  controller: class {{pascalCase name}}Component {
+  bindings: { },
+  controller: class {
     constructor() {
       // 'ngInject';
       this.name = '{{pascalCase name}} Component';

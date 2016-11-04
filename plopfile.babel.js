@@ -32,13 +32,18 @@ const component = {
     },
     {
       type: 'add',
+      path: '{{path}}/{{kabobCase name}}/{{kabobCase name}}.spec.js',
+      templateFile: 'blueprints/component/name.spec.js',
+    },
+    {
+      type: 'add',
       path: '{{path}}/{{kabobCase name}}/{{kabobCase name}}.html',
       templateFile: 'blueprints/component/name.html',
     },
     {
       type: 'add',
-      path: '{{path}}/{{kabobCase name}}/{{kabobCase name}}.styl',
-      templateFile: 'blueprints/component/name.styl',
+      path: '{{path}}/{{kabobCase name}}/{{kabobCase name}}.scss',
+      templateFile: 'blueprints/component/name.scss',
     },
   ],
 };
