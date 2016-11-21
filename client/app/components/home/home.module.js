@@ -2,14 +2,13 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import { homeComponent } from './home.component';
 
-export default angular.module('home', [uiRouter])
-  .config(($stateProvider, $urlRouterProvider) => {
+export const HomeModule = angular
+  .module('home', [uiRouter])
+  .config(($stateProvider) => {
     'ngInject';
 
-    $urlRouterProvider.otherwise('/');
     $stateProvider
-      .state('home', {
-        title: 'NextNG',
+      .state('app.home', {
         url: '/',
         component: 'home',
       });

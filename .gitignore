@@ -6,3 +6,4 @@ node_modules
 .happypack/
 *.log
 dist/
+yarn.lock

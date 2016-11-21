@@ -14,7 +14,7 @@ import config from './webpack.config';
 config.devtool = 'source-map';
 
 // only one entry point since no hot reloading required
-config.entry = path.resolve(process.cwd(), 'client/app/app.js');
+config.entry = config.constants.entry;
 
 // set output directory to dist folder
 // add hashes to chunk and filenames to cache bust deployments

@@ -9,6 +9,9 @@ import postcssFocus from 'postcss-focus';
 import postcssReporter from 'postcss-reporter';
 
 export default {
+  constants: {
+    entry: path.resolve(process.cwd(), 'client/app/root.js'),
+  },
   debug: true,
   progress: true,
   stats: true,
@@ -19,11 +22,12 @@ export default {
   },
   module: {
     loaders: [
+      // { test: /\.html$/, loader: `ngtemplate?relativeTo=${(path.resolve(process.cwd()))}/client/app/!html` },
       { test: /\.html$/, loader: 'html' },
       { test: /\.js$/, exclude: [/node_modules/], loader: 'ng-annotate!happypack/loader' },
       { test: /\.json$/, loader: 'json-loader' },
       { test: /\.(eot|svg|ttf|woff|woff2)$/, loader: 'file-loader' },
-      { test: /\.(jpg|png|gif)$/, loaders: ['file-loader', 'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}'] },
+      { test: /\.(jpg|png|gif)$/, loaders: ['file-loader'] }, // leave out image optimization for now 'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}'] },
       { test: /\.ico$/, loader: 'file-loader?name=[name].[ext]' },
     ],
   },

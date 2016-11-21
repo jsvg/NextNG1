@@ -19,7 +19,7 @@ config.devtool = 'inline-eval-cheap-source-map';
 config.entry = [
   path.resolve(process.cwd(), 'client/webpack-public-path'),
   'webpack-hot-middleware/client?reload=true',
-  path.resolve(process.cwd(), 'client/app/app.js'),
+  config.constants.entry,
 ];
 
 // path set to client since hot reload stores assets in memory
